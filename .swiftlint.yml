@@ -1,0 +1,5 @@
+disabled_rules:
+  - leading_whitespace
+  - trailing_whitespace
+  - identifier_name
+  - type_name
