@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		602250C528AFE618001C5FE6 /* HurryPizza_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250C428AFE618001C5FE6 /* HurryPizza_iOSApp.swift */; };
+		602250C728AFE618001C5FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250C628AFE618001C5FE6 /* ContentView.swift */; };
+		602250C928AFE619001C5FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602250C828AFE619001C5FE6 /* Assets.xcassets */; };
+		602250CC28AFE619001C5FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602250CB28AFE619001C5FE6 /* Preview Assets.xcassets */; };
+		602250D628AFE619001C5FE6 /* HurryPizza_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250D528AFE619001C5FE6 /* HurryPizza_iOSTests.swift */; };
+		602250E028AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250DF28AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift */; };
+		602250E228AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250E128AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		602250D228AFE619001C5FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 602250B928AFE618001C5FE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 602250C028AFE618001C5FE6;
+			remoteInfo = "HurryPizza-iOS";
+		};
+		602250DC28AFE619001C5FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 602250B928AFE618001C5FE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 602250C028AFE618001C5FE6;
+			remoteInfo = "HurryPizza-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		602250C128AFE618001C5FE6 /* HurryPizza-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HurryPizza-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		602250C428AFE618001C5FE6 /* HurryPizza_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurryPizza_iOSApp.swift; sourceTree = "<group>"; };
+		602250C628AFE618001C5FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		602250C828AFE619001C5FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		602250CB28AFE619001C5FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		602250D128AFE619001C5FE6 /* HurryPizza-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HurryPizza-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		602250D528AFE619001C5FE6 /* HurryPizza_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurryPizza_iOSTests.swift; sourceTree = "<group>"; };
+		602250DB28AFE619001C5FE6 /* HurryPizza-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HurryPizza-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		602250DF28AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurryPizza_iOSUITests.swift; sourceTree = "<group>"; };
+		602250E128AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurryPizza_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		602250BE28AFE618001C5FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250CE28AFE619001C5FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250D828AFE619001C5FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		602250B828AFE618001C5FE6 = {
+			isa = PBXGroup;
+			children = (
+				602250C328AFE618001C5FE6 /* HurryPizza-iOS */,
+				602250D428AFE619001C5FE6 /* HurryPizza-iOSTests */,
+				602250DE28AFE61A001C5FE6 /* HurryPizza-iOSUITests */,
+				602250C228AFE618001C5FE6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		602250C228AFE618001C5FE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				602250C128AFE618001C5FE6 /* HurryPizza-iOS.app */,
+				602250D128AFE619001C5FE6 /* HurryPizza-iOSTests.xctest */,
+				602250DB28AFE619001C5FE6 /* HurryPizza-iOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		602250C328AFE618001C5FE6 /* HurryPizza-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				602250C428AFE618001C5FE6 /* HurryPizza_iOSApp.swift */,
+				602250C628AFE618001C5FE6 /* ContentView.swift */,
+				602250C828AFE619001C5FE6 /* Assets.xcassets */,
+				602250CA28AFE619001C5FE6 /* Preview Content */,
+			);
+			path = "HurryPizza-iOS";
+			sourceTree = "<group>";
+		};
+		602250CA28AFE619001C5FE6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				602250CB28AFE619001C5FE6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		602250D428AFE619001C5FE6 /* HurryPizza-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				602250D528AFE619001C5FE6 /* HurryPizza_iOSTests.swift */,
+			);
+			path = "HurryPizza-iOSTests";
+			sourceTree = "<group>";
+		};
+		602250DE28AFE61A001C5FE6 /* HurryPizza-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				602250DF28AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift */,
+				602250E128AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift */,
+			);
+			path = "HurryPizza-iOSUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		602250C028AFE618001C5FE6 /* HurryPizza-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 602250E528AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOS" */;
+			buildPhases = (
+				602250BD28AFE618001C5FE6 /* Sources */,
+				602250BE28AFE618001C5FE6 /* Frameworks */,
+				602250BF28AFE618001C5FE6 /* Resources */,
+				602250EE28AFE94C001C5FE6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HurryPizza-iOS";
+			productName = "HurryPizza-iOS";
+			productReference = 602250C128AFE618001C5FE6 /* HurryPizza-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		602250D028AFE619001C5FE6 /* HurryPizza-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 602250E828AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOSTests" */;
+			buildPhases = (
+				602250CD28AFE619001C5FE6 /* Sources */,
+				602250CE28AFE619001C5FE6 /* Frameworks */,
+				602250CF28AFE619001C5FE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				602250D328AFE619001C5FE6 /* PBXTargetDependency */,
+			);
+			name = "HurryPizza-iOSTests";
+			productName = "HurryPizza-iOSTests";
+			productReference = 602250D128AFE619001C5FE6 /* HurryPizza-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		602250DA28AFE619001C5FE6 /* HurryPizza-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 602250EB28AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOSUITests" */;
+			buildPhases = (
+				602250D728AFE619001C5FE6 /* Sources */,
+				602250D828AFE619001C5FE6 /* Frameworks */,
+				602250D928AFE619001C5FE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				602250DD28AFE619001C5FE6 /* PBXTargetDependency */,
+			);
+			name = "HurryPizza-iOSUITests";
+			productName = "HurryPizza-iOSUITests";
+			productReference = 602250DB28AFE619001C5FE6 /* HurryPizza-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		602250B928AFE618001C5FE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					602250C028AFE618001C5FE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					602250D028AFE619001C5FE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 602250C028AFE618001C5FE6;
+					};
+					602250DA28AFE619001C5FE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 602250C028AFE618001C5FE6;
+					};
+				};
+			};
+			buildConfigurationList = 602250BC28AFE618001C5FE6 /* Build configuration list for PBXProject "HurryPizza-iOS" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 602250B828AFE618001C5FE6;
+			productRefGroup = 602250C228AFE618001C5FE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				602250C028AFE618001C5FE6 /* HurryPizza-iOS */,
+				602250D028AFE619001C5FE6 /* HurryPizza-iOSTests */,
+				602250DA28AFE619001C5FE6 /* HurryPizza-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		602250BF28AFE618001C5FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				602250CC28AFE619001C5FE6 /* Preview Assets.xcassets in Resources */,
+				602250C928AFE619001C5FE6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250CF28AFE619001C5FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250D928AFE619001C5FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		602250EE28AFE94C001C5FE6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		602250BD28AFE618001C5FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				602250C728AFE618001C5FE6 /* ContentView.swift in Sources */,
+				602250C528AFE618001C5FE6 /* HurryPizza_iOSApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250CD28AFE619001C5FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				602250D628AFE619001C5FE6 /* HurryPizza_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		602250D728AFE619001C5FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				602250E228AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift in Sources */,
+				602250E028AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		602250D328AFE619001C5FE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 602250C028AFE618001C5FE6 /* HurryPizza-iOS */;
+			targetProxy = 602250D228AFE619001C5FE6 /* PBXContainerItemProxy */;
+		};
+		602250DD28AFE619001C5FE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 602250C028AFE618001C5FE6 /* HurryPizza-iOS */;
+			targetProxy = 602250DC28AFE619001C5FE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		602250E328AFE61A001C5FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		602250E428AFE61A001C5FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		602250E628AFE61A001C5FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HurryPizza-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		602250E728AFE61A001C5FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HurryPizza-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		602250E928AFE61A001C5FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HurryPizza-iOS.app/HurryPizza-iOS";
+			};
+			name = Debug;
+		};
+		602250EA28AFE61A001C5FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HurryPizza-iOS.app/HurryPizza-iOS";
+			};
+			name = Release;
+		};
+		602250EC28AFE61A001C5FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "HurryPizza-iOS";
+			};
+			name = Debug;
+		};
+		602250ED28AFE61A001C5FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92NGUT4BRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.byunghak.HurryPizza-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "HurryPizza-iOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		602250BC28AFE618001C5FE6 /* Build configuration list for PBXProject "HurryPizza-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				602250E328AFE61A001C5FE6 /* Debug */,
+				602250E428AFE61A001C5FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		602250E528AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				602250E628AFE61A001C5FE6 /* Debug */,
+				602250E728AFE61A001C5FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		602250E828AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				602250E928AFE61A001C5FE6 /* Debug */,
+				602250EA28AFE61A001C5FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		602250EB28AFE61A001C5FE6 /* Build configuration list for PBXNativeTarget "HurryPizza-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				602250EC28AFE61A001C5FE6 /* Debug */,
+				602250ED28AFE61A001C5FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 602250B928AFE618001C5FE6 /* Project object */;
+}
