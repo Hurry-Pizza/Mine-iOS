@@ -14,6 +14,7 @@
 		602250D628AFE619001C5FE6 /* HurryPizza_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250D528AFE619001C5FE6 /* HurryPizza_iOSTests.swift */; };
 		602250E028AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250DF28AFE61A001C5FE6 /* HurryPizza_iOSUITests.swift */; };
 		602250E228AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602250E128AFE61A001C5FE6 /* HurryPizza_iOSUITestsLaunchTests.swift */; };
+		602250F128AFF106001C5FE6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 602250F028AFF106001C5FE6 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602250F128AFF106001C5FE6 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +146,9 @@
 			dependencies = (
 			);
 			name = "HurryPizza-iOS";
+			packageProductDependencies = (
+				602250F028AFF106001C5FE6 /* Alamofire */,
+			);
 			productName = "HurryPizza-iOS";
 			productReference = 602250C128AFE618001C5FE6 /* HurryPizza-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -216,6 +221,9 @@
 				Base,
 			);
 			mainGroup = 602250B828AFE618001C5FE6;
+			packageReferences = (
+				602250EF28AFF106001C5FE6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 602250C228AFE618001C5FE6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -604,6 +612,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		602250EF28AFF106001C5FE6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		602250F028AFF106001C5FE6 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 602250EF28AFF106001C5FE6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 602250B928AFE618001C5FE6 /* Project object */;
 }
