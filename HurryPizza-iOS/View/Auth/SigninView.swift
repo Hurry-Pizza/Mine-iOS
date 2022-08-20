@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SigninView: View {
     private let viewModel = SigninViewModel()
@@ -13,20 +14,83 @@ struct SigninView: View {
     @State private var email = ""
     @State private var password = ""
     
+    @State private var keyboardHeight: CGFloat = 0
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
-            TextField("Enter your email", text: $email)
-                .padding()
-            SecureField("Enter your password", text: $password)
-                .padding()
-            Button {
-                viewModel.signin(email: email, password: password)
-            } label: {
-                Text("Sign in")
+        ZStack {
+            Image("mine_home_bg")
+                .scaledToFill()
+            
+            VStack {
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 10) {
+                    HStack {
+                        Image(systemName: "person.fill")
+                            .foregroundColor(.gray)
+                            .padding(.top, 20)
+                            .padding(.leading, 20)
+                            .padding(.bottom, 10)
+                        
+                        TextField("Enter your email", text: $email)
+                            .padding(.top, 20)
+                            .padding(.leading, 5)
+                            .padding(.trailing, 20)
+                            .padding(.bottom, 10)
+                    }
+                    
+                    Divider()
+                        .border(.gray, width: 2)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 20)
+                    
+                    HStack {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.gray)
+                            .padding(.top, 10)
+                            .padding(.leading, 20)
+                            .padding(.bottom, 20)
+                        
+                        SecureField("Enter your password", text: $password)
+                            .padding(.top, 10)
+                            .padding(.leading, 5)
+                            .padding(.trailing, 20)
+                            .padding(.bottom, 20)
+                    }
+                }
+                .background(Color.white)
+                .cornerRadius(24)
+                .padding(.leading, 30)
+                .padding(.trailing, 30)
+                .padding(.bottom, self.keyboardHeight > 0 ? 100 : 0)
+                .onReceive(Publishers.keyboardHeight) {
+                    self.keyboardHeight = $0
+                }
+                
+                HStack {
+                    Spacer()
+                    
+                    ZStack(alignment: .topLeading) {
+                        Button {
+                            viewModel.signin(email: email, password: password)
+                        } label: {
+                            Text("Sign In")
+                                .frame(width: 120, height: 44, alignment: .center)
+                                .foregroundColor(.white)
+                        }
+                        .background(AppColor.junction_blue.color)
+                        .cornerRadius(12)
+                        
+                        Rectangle()
+                            .fill(AppColor.junction_blue.color)
+                            .frame(width: 20, height: 20, alignment: .topLeading)
+                    }
+                }
+                .padding(.trailing, 30)
             }
+            .padding(.bottom, 80)
         }
-        .padding(.leading, 30)
-        .padding(.trailing, 30)
+        .ignoresSafeArea()
     }
 }
 
