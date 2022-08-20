@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct SignupView: View {
-    private let viewModel = SignupViewModel()
+    @StateObject private var viewModel = SignupViewModel()
     
     @State private var email = ""
     @State private var nickname = ""
@@ -87,6 +87,11 @@ struct SignupView: View {
                 .padding(.trailing, 30)
                 
                 HStack {
+                    if $viewModel.isSignupFail.wrappedValue {
+                        Text("회원가입에 실패했습니다.")
+                            .foregroundColor(.red)
+                    }
+                    
                     Spacer()
                     
                     ZStack(alignment: .topLeading) {
@@ -97,7 +102,7 @@ struct SignupView: View {
                                 password: password
                             )
                         } label: {
-                            Text("Sign In")
+                            Text("Sign Up")
                                 .frame(width: 120, height: 44, alignment: .center)
                                 .foregroundColor(.white)
                         }
@@ -109,6 +114,7 @@ struct SignupView: View {
                             .frame(width: 20, height: 20, alignment: .topLeading)
                     }
                 }
+                .padding(.leading, 30)
                 .padding(.trailing, 30)
             }
             .padding(.bottom, self.keyboardHeight > 0 ? 200 : 120)

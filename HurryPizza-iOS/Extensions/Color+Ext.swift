@@ -22,16 +22,12 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
     
-    var toHex: String? {
-        return toHex()
-    }
-    
     // MARK: - From UIColor to String
-    func toHex(alpha: Bool = false) -> String? {
-        guard let components = cgColor?.components, components.count >= 3 else {
+    func toHex() -> String? {
+        let uic = UIColor(self)
+        guard let components = uic.cgColor.components, components.count >= 3 else {
             return nil
         }
-        
         let r = Float(components[0])
         let g = Float(components[1])
         let b = Float(components[2])
@@ -41,7 +37,7 @@ extension Color {
             a = Float(components[3])
         }
         
-        if alpha {
+        if a != Float(1.0) {
             return String(
                 format: "%02lX%02lX%02lX%02lX",
                 lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255)

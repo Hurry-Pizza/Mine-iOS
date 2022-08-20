@@ -13,7 +13,7 @@ final class SigninViewModel: ObservableObject {
     private let authManager = AuthManager()
     private var subscriptions = Set<AnyCancellable>()
     
-    @Published var isSignInSuccess = false
+    @Published var isSignInFail = false
     
     func signin(email: String, password: String) {
         authManager.signin(email: email, password: password)
@@ -26,11 +26,11 @@ final class SigninViewModel: ObservableObject {
                         if let token = response.response?.headers.value(for: "Authorization") {
                             KeychainWrapper.standard.set(token, forKey: "accessToken")
                             print(token)
-                            self.isSignInSuccess = true
+                            self.isSignInFail = false
                         }
                     case .failure(let error):
                         print("로그인 실패: \(error)")
-                        self.isSignInSuccess = false
+                        self.isSignInFail = true
                     }
                 }
             ).store(in: &subscriptions)

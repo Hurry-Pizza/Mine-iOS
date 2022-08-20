@@ -14,12 +14,12 @@ final class SignupViewModel: ObservableObject {
     private let authManager = AuthManager()
     private var subscriptions = Set<AnyCancellable>()
     
-    @Published var isSignupSuccess = false
+    @Published var isSignupFail = false
     
     let pathColors: [Color] = [.red, .blue, .green, .yellow, .orange, .cyan]
     
     func signup(email: String, nickname: String, password: String) {
-        guard let colorCode = pathColors.randomElement()?.toHex else {
+        guard let colorCode = pathColors.randomElement()?.toHex() else {
             return
         }
         
@@ -37,11 +37,11 @@ final class SignupViewModel: ObservableObject {
                 case .success:
                     if let token = response.response?.headers.value(for: "Authorization") {
                         KeychainWrapper.standard.set(token, forKey: "accessToken")
-                        self.isSignupSuccess = true
+                        self.isSignupFail = false
                     }
                 case .failure(let error):
                     print("회원가입 실패: \(error)")
-                    self.isSignupSuccess = false
+                    self.isSignupFail = true
                 }
             }
         )

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct SigninView: View {
-    private let viewModel = SigninViewModel()
+    @StateObject private var viewModel = SigninViewModel()
     
     @State private var email = ""
     @State private var password = ""
@@ -66,6 +66,11 @@ struct SigninView: View {
                 .padding(.trailing, 30)
                 
                 HStack {
+                    if $viewModel.isSignInFail.wrappedValue {
+                        Text("로그인에 실패했습니다.")
+                            .foregroundColor(.red)
+                    }
+                    
                     Spacer()
                     
                     ZStack(alignment: .topLeading) {
@@ -84,6 +89,7 @@ struct SigninView: View {
                             .frame(width: 20, height: 20, alignment: .topLeading)
                     }
                 }
+                .padding(.leading, 30)
                 .padding(.trailing, 30)
             }
             .padding(.bottom, self.keyboardHeight > 0 ? 200 : 120)
