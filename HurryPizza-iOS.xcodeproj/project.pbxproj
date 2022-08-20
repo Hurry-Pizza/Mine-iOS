@@ -37,6 +37,16 @@
 		6031A61A28B06E600043104C /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A61928B06E600043104C /* SignupViewModel.swift */; };
 		6031A61D28B06E900043104C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A61C28B06E900043104C /* MapViewModel.swift */; };
 		6031A61F28B06EB80043104C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A61E28B06EB80043104C /* MapView.swift */; };
+		6031A62428B071C50043104C /* RankRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62328B071C50043104C /* RankRequest.swift */; };
+		6031A62628B071CD0043104C /* RankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62528B071CD0043104C /* RankResponse.swift */; };
+		6031A62928B0733B0043104C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62828B0733B0043104C /* HomeViewModel.swift */; };
+		6031A62B28B073440043104C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62A28B073440043104C /* HomeView.swift */; };
+		6031A62E28B073930043104C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62D28B073930043104C /* SplashView.swift */; };
+		6031A63028B0739B0043104C /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A62F28B0739B0043104C /* SplashViewModel.swift */; };
+		6031A63328B075A20043104C /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A63228B075A20043104C /* OnboardingViewModel.swift */; };
+		6031A63528B075B40043104C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A63428B075B40043104C /* OnboardingView.swift */; };
+		6031A63828B0760F0043104C /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A63728B0760F0043104C /* AppColor.swift */; };
+		6031A63B28B076420043104C /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6031A63A28B076420043104C /* Color+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +99,16 @@
 		6031A61928B06E600043104C /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		6031A61C28B06E900043104C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		6031A61E28B06EB80043104C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		6031A62328B071C50043104C /* RankRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankRequest.swift; sourceTree = "<group>"; };
+		6031A62528B071CD0043104C /* RankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankResponse.swift; sourceTree = "<group>"; };
+		6031A62828B0733B0043104C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		6031A62A28B073440043104C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6031A62D28B073930043104C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		6031A62F28B0739B0043104C /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		6031A63228B075A20043104C /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		6031A63428B075B40043104C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		6031A63728B0760F0043104C /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		6031A63A28B076420043104C /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +160,8 @@
 		602250C328AFE618001C5FE6 /* HurryPizza-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6031A63928B0763A0043104C /* Extensions */,
+				6031A63628B075E40043104C /* Utils */,
 				6031A5FF28B01FFE0043104C /* View */,
 				6031A5EE28B01A4F0043104C /* Model */,
 				6031A5E028B016B90043104C /* Network */,
@@ -197,6 +219,7 @@
 		6031A5EE28B01A4F0043104C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6031A62028B071AD0043104C /* Rank */,
 				6031A5F428B01B130043104C /* Path */,
 				6031A5F328B01B070043104C /* Auth */,
 			);
@@ -226,6 +249,9 @@
 		6031A5FF28B01FFE0043104C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6031A63128B0758E0043104C /* Onboarding */,
+				6031A62C28B0738A0043104C /* Splash */,
+				6031A62728B073320043104C /* Home */,
 				6031A61B28B06E860043104C /* Map */,
 				6031A60E28B06D540043104C /* Settings */,
 				6031A60A28B06D1F0043104C /* Profile */,
@@ -281,6 +307,58 @@
 				6031A61E28B06EB80043104C /* MapView.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		6031A62028B071AD0043104C /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				6031A62328B071C50043104C /* RankRequest.swift */,
+				6031A62528B071CD0043104C /* RankResponse.swift */,
+			);
+			path = Rank;
+			sourceTree = "<group>";
+		};
+		6031A62728B073320043104C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6031A62828B0733B0043104C /* HomeViewModel.swift */,
+				6031A62A28B073440043104C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6031A62C28B0738A0043104C /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				6031A62D28B073930043104C /* SplashView.swift */,
+				6031A62F28B0739B0043104C /* SplashViewModel.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		6031A63128B0758E0043104C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6031A63228B075A20043104C /* OnboardingViewModel.swift */,
+				6031A63428B075B40043104C /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6031A63628B075E40043104C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6031A63728B0760F0043104C /* AppColor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6031A63928B0763A0043104C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6031A63A28B076420043104C /* Color+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,7 +519,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6031A60628B06CB80043104C /* SignupView.swift in Sources */,
+				6031A62B28B073440043104C /* HomeView.swift in Sources */,
 				6031A61F28B06EB80043104C /* MapView.swift in Sources */,
+				6031A62628B071CD0043104C /* RankResponse.swift in Sources */,
 				6031A61428B06E440043104C /* ProfileViewModel.swift in Sources */,
 				6031A61628B06E4B0043104C /* RankViewModel.swift in Sources */,
 				6031A61828B06E540043104C /* SigninViewModel.swift in Sources */,
@@ -449,19 +529,27 @@
 				6031A5F628B01B2E0043104C /* PathCompleteRequest.swift in Sources */,
 				6031A5E228B016C30043104C /* UserManager.swift in Sources */,
 				6031A5E628B016E20043104C /* RankManager.swift in Sources */,
+				6031A62928B0733B0043104C /* HomeViewModel.swift in Sources */,
 				602250C728AFE618001C5FE6 /* ContentView.swift in Sources */,
+				6031A63528B075B40043104C /* OnboardingView.swift in Sources */,
 				602250C528AFE618001C5FE6 /* HurryPizza_iOSApp.swift in Sources */,
 				6031A61228B06E3A0043104C /* SettingViewModel.swift in Sources */,
+				6031A63028B0739B0043104C /* SplashViewModel.swift in Sources */,
 				6031A61D28B06E900043104C /* MapViewModel.swift in Sources */,
 				6031A5FC28B01BC70043104C /* OtherUserPathRequest.swift in Sources */,
 				6031A60C28B06D280043104C /* ProfileView.swift in Sources */,
+				6031A63828B0760F0043104C /* AppColor.swift in Sources */,
+				6031A63B28B076420043104C /* Color+Ext.swift in Sources */,
 				6031A61028B06D5C0043104C /* SettingView.swift in Sources */,
+				6031A62428B071C50043104C /* RankRequest.swift in Sources */,
 				6031A5F028B01A870043104C /* AuthResponse.swift in Sources */,
 				6031A5EA28B019E40043104C /* Response.swift in Sources */,
 				6031A61A28B06E600043104C /* SignupViewModel.swift in Sources */,
 				6031A5E428B016DB0043104C /* RouteManager.swift in Sources */,
 				6031A5FA28B01B8E0043104C /* PathCompleteResponse.swift in Sources */,
+				6031A63328B075A20043104C /* OnboardingViewModel.swift in Sources */,
 				6031A5F228B01AE80043104C /* AuthRequest.swift in Sources */,
+				6031A62E28B073930043104C /* SplashView.swift in Sources */,
 				6031A5FE28B01C2A0043104C /* OtherUserPathResponse.swift in Sources */,
 				6031A60428B06CA60043104C /* SignInView.swift in Sources */,
 			);
