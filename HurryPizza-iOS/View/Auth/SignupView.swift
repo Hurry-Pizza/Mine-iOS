@@ -12,7 +12,7 @@ struct SignupView: View {
     
     var body: some View {
         Button {
-            viewModel.signup()
+//            viewModel.signup()
         } label: {
             Text("Sign up")
         }

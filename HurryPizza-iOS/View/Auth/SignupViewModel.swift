@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 
 final class SignupViewModel: ObservableObject {
     private let authManager = AuthManager()
-    var subscriptions = Set<AnyCancellable>()
+    private var subscriptions = Set<AnyCancellable>()
     
     @Published var isSignupSuccess = false
     
@@ -22,13 +22,14 @@ final class SignupViewModel: ObservableObject {
                 receiveValue: { [weak self] response in
                     guard let self = self else { return }
                     switch response.result {
-                    case .success(_):
+                    case .success:
                         if let token = response.response?.headers.value(for: "Authorization") {
                             KeychainWrapper.standard.set(token, forKey: "accessToken")
                             self.isSignupSuccess = true
                         }
                     case .failure(let error):
                         print("회원가입 실패: \(error)")
+                        self.isSignupSuccess = false
                     }
                 }
             ).store(in: &subscriptions)
