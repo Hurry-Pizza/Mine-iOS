@@ -17,6 +17,7 @@ struct MapView: View {
 	@State private var lineCoorinate: [CLLocationCoordinate2D] = []
 	private let mapDelegate = MapDelegate()
 	@State var showCompleteModal: Bool = true
+    @Environment(\.presentationMode) var presentationMode
 
 	var body: some View {
 		ZStack {
@@ -33,7 +34,51 @@ struct MapView: View {
 				.foregroundColor(.blue)
 				.cornerRadius(20)
 				.frame(width: 10, height: 10)
-		}
+            
+            VStack {
+                HStack {
+                    Button {
+                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.junctionRed)
+                                .cornerRadius(12)
+                                .frame(width: 100, height: 40)
+                            
+                            Text("Quit")
+                                .font(.system(size: 22, weight: .semibold, design: .default))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.junctionBlack)
+                            .cornerRadius(8)
+                            .frame(width: 120, height: 40)
+                        
+                        HStack {
+                            Image("timer_icon")
+                                .font(.system(size: 22))
+                            
+                            Text("0h 50m")
+                                .font(.system(size: 20, weight: .semibold, design: .default))
+                                .foregroundColor(.junctionWhite)
+                        }
+                    }
+                }
+                .padding(.leading, 16)
+                .padding(.trailing, 16)
+                .padding(.top, 64)
+                
+                Spacer()
+            }
+        }
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
 	}
 }
 
