@@ -33,6 +33,8 @@ struct SigninView: View {
                             .padding(.bottom, 10)
                         
                         TextField("Enter your email", text: $email)
+                            .textInputAutocapitalization(.never)
+                            .keyboardType(.emailAddress)
                             .padding(.top, 20)
                             .padding(.leading, 5)
                             .padding(.trailing, 20)
@@ -62,10 +64,6 @@ struct SigninView: View {
                 .cornerRadius(24)
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
-                .padding(.bottom, self.keyboardHeight > 0 ? 100 : 0)
-                .onReceive(Publishers.keyboardHeight) {
-                    self.keyboardHeight = $0
-                }
                 
                 HStack {
                     Spacer()
@@ -88,7 +86,10 @@ struct SigninView: View {
                 }
                 .padding(.trailing, 30)
             }
-            .padding(.bottom, 80)
+            .padding(.bottom, self.keyboardHeight > 0 ? 200 : 120)
+            .onReceive(Publishers.keyboardHeight) {
+                self.keyboardHeight = $0
+            }
         }
         .ignoresSafeArea()
     }
