@@ -9,7 +9,10 @@ import SwiftUI
 import CoreLocation
 
 struct MapConfirmPopUPView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var pathList: [CLLocationCoordinate2D]
+    var mapImage: Image
     @State private var showModal = false
     
     var body: some View {
@@ -40,12 +43,14 @@ struct MapConfirmPopUPView: View {
 					.foregroundColor(.junctionGray)
 					.font(.system(size: 17))
 					.padding(.top, 5)
-				
-				Rectangle()
+
+                mapImage
 					.foregroundColor(.gray)
-					.cornerRadius(13)
 					.padding(.top, 22)
 					.frame(width: 309, height: 320)
+                    .cornerRadius(13)
+                    .scaledToFill()
+                    .clipped()
 				
 				Spacer()
 				
@@ -68,6 +73,11 @@ struct MapConfirmPopUPView: View {
 				Text("Cancel")
 					.foregroundColor(Color(hex: "A6CDA7"))
 			}
+            .onTapGesture {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            
+            
 			ZStack {
 				Rectangle()
 					.foregroundColor(.junctionGreen)
@@ -89,6 +99,6 @@ struct MapConfirmPopUPView: View {
 
 struct MapConfirmPopUPView_Previews: PreviewProvider {
     static var previews: some View {
-        MapConfirmPopUPView(pathList: [])
+        MapConfirmPopUPView(pathList: [], mapImage: Image(systemName: "person"))
     }
 }

@@ -13,11 +13,13 @@ import UIKit
 import Combine
 
 struct MapView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
 	@StateObject private var manager = LocationManager()
 	@State private var lineCoorinate: [CLLocationCoordinate2D] = []
-	private let mapDelegate = MapDelegate()
-	@State var showCompleteModal: Bool = true
-    @Environment(\.presentationMode) var presentationMode
+	@State private var showCompleteModal: Bool = true
+    
+    private let mapDelegate = MapDelegate()
 
 	var body: some View {
 		ZStack {
@@ -27,8 +29,9 @@ struct MapView: View {
 				delegate: mapDelegate,
 				map: mapDelegate.map,
 				lineCoordinates: $manager.lineCoordinates,
-				showCompleteModal: $showCompleteModal
-			)
+				showCompleteModal: $showCompleteModal,
+                needToCapture: $manager.needToCaptureMap
+            )
 
 			Rectangle()
 				.foregroundColor(.blue)
@@ -77,9 +80,18 @@ struct MapView: View {
                 Spacer()
             }
             
-            #warning("TODO: 테스트용")
-            if $manager.elapsedSeconds.wrappedValue > 5 {
-                MapConfirmPopUPView(pathList: manager.coordinates)
+            if manager.elapsedSeconds > 5 && manager.capturedMap != nil {
+                MapConfirmPopUPView(
+                    pathList: manager.coordinates,
+                    mapImage: manager.capturedMap!
+                )
+            }
+            
+            if showCompleteModal && manager.capturedMap != nil {
+                MapConfirmPopUPView(
+                    pathList: manager.coordinates,
+                    mapImage: manager.capturedMap!
+                )
             }
         }
         .ignoresSafeArea()
@@ -102,6 +114,7 @@ struct CustomMapView: UIViewRepresentable {
 
 	@Binding var lineCoordinates: [CLLocationCoordinate2D]
 	@Binding var showCompleteModal: Bool
+    @Binding var needToCapture: Bool
 
 	func makeUIView(context: Context) -> some UIView {
 		map.setRegion(point, animated: true)
@@ -124,9 +137,9 @@ struct CustomMapView: UIViewRepresentable {
 
 				map.addOverlay(line)
 			}
-			
 			if lineCoordinates.count > 5 && fetchDistance(lineCoordinates.first!, lineCoordinates.last!) < 23 {
 				showCompleteModal.toggle()
+                needToCapture = true
 			}
 		}
 
@@ -139,6 +152,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var lineCoordinates: [CLLocationCoordinate2D] = []
 	@Published var coordinates: [CLLocationCoordinate2D] = []
     @Published var elapsedSeconds: Int = 0
+    @Published var capturedMap: Image?
+    @Published var needToCaptureMap: Bool = false
+    
     private var timer: Timer?
     
 	private let manager = CLLocationManager()
@@ -166,10 +182,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @objc
     func addSecond() {
         self.elapsedSeconds += 1
+        
+        #warning("TODO: 테스트용 지워야 됨")
+        // TODO: 테스트용 지워야 됨
+//        if capturedMap == nil && (self.elapsedSeconds > 5 || needToCaptureMap) {
+        if capturedMap == nil && needToCaptureMap {
+            capturedMap = Image(uiImage: takeCapture())
+        }
     }
-
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		locations.map { location in
+    
+    func takeCapture() -> UIImage {
+        var image: UIImage?
+        guard let currentLayer = UIApplication.shared.windows.first { $0.isKeyWindow }?.layer else { return UIImage() }
+        let currentScale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(currentLayer.frame.size, false, currentScale)
+        guard let currentContext = UIGraphicsGetCurrentContext() else { return UIImage() }
+        currentLayer.render(in: currentContext)
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? UIImage()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locations.map { location in
 			let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
 			let center = CLLocationCoordinate2D(latitude: round(location.coordinate.latitude * 10_000_000) / 10_000_000, longitude: round(location.coordinate.longitude * 1_000_000) / 1_000_000)
 
@@ -237,7 +272,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 } // Class LocationManager
 
 class MapDelegate: UIViewController, MKMapViewDelegate {
-	var map = MKMapView()
+    var map = MKMapView()
 
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 		if overlay is MKCircle {
