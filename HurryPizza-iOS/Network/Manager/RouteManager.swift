@@ -15,6 +15,18 @@ final class RouteManager {
     
     let kEarthRadius = 6378137.0
     
+    func didTapSaveButton(_ pathList: [CLLocationCoordinate2D]) {
+        if AuthManager.shared.isAuthenticated {
+            _ = savePath(pathList)
+            return
+        }
+
+        let pathArr = pathList.map { CustomLocation(lng: $0.longitude, lat: $0.latitude) }
+        if let pathData = try? JSONEncoder().encode(pathArr) {
+            UserDefaults.standard.set(pathData, forKey: "initialPath")
+        }
+    }
+    
     func savePath(
         _ pathList: [CLLocationCoordinate2D]
     ) -> AnyPublisher<DataResponse<SavePathResponse, PathError>, Never> {
@@ -106,4 +118,9 @@ final class RouteManager {
 enum PathError: Error {
     case otherUserPathError
     case savePathError
+}
+
+struct CustomLocation: Codable {
+    var lng: Double
+    var lat: Double
 }

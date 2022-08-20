@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import SwiftKeychainWrapper
+import CoreLocation
 
 final class SignupViewModel: ObservableObject {
     private let authManager = AuthManager()
@@ -38,6 +39,13 @@ final class SignupViewModel: ObservableObject {
                     if let token = response.response?.headers.value(for: "Authorization") {
                         KeychainWrapper.standard.set(token, forKey: "accessToken")
                         self.isSignupFail = false
+                        
+                        if let pathData = UserDefaults.standard.value(forKey: "initialPath") as? Data,
+                           let paths = try? JSONDecoder().decode([CustomLocation].self, from: pathData) {
+                            let pathList = paths.map { CLLocationCoordinate2D(latitude: $0.lat, longitude: $0.lng) }
+                            _ = RouteManager.shared.savePath(pathList)
+                            UserDefaults.standard.removeObject(forKey: "initialPath")
+                        }
                     }
                 case .failure(let error):
                     print("회원가입 실패: \(error)")
