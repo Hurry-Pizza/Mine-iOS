@@ -9,6 +9,5 @@ import Foundation
 import CoreLocation
 
 struct OtherUserPathReqeust: Encodable {
-    var longitude: Double
-    var latitude: Double
+   
 }
