@@ -28,7 +28,7 @@ final class RouteManager {
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let params: [String: Any] = [
             "path": pathArr,
-            "area": 0.0
+            "area": regionArea(locations: pathList)
         ]
         
         try? request?.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
