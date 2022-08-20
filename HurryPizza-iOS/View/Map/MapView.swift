@@ -64,7 +64,7 @@ struct MapView: View {
                             Image("timer_icon")
                                 .font(.system(size: 22))
                             
-                            Text("0h 50m")
+                            Text("\(Int(exactly: $manager.elapsedSeconds.wrappedValue / 3600)!)h \(Int(exactly: $manager.elapsedSeconds.wrappedValue / 60)!)m")
                                 .font(.system(size: 20, weight: .semibold, design: .default))
                                 .foregroundColor(.junctionWhite)
                         }
@@ -79,6 +79,9 @@ struct MapView: View {
         }
         .ignoresSafeArea()
         .navigationBarHidden(true)
+        .onAppear(perform: {
+            self.manager.initializeTimer()
+        })
 	}
 }
 
@@ -131,6 +134,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
 	@Published var lineCoordinates: [CLLocationCoordinate2D] = []
 	@Published var coordinates: [CLLocationCoordinate2D] = []
+    @Published var elapsedSeconds: Int = 0
+    private var timer: Timer?
+    
 	private let manager = CLLocationManager()
     
     private var subscription = Set<AnyCancellable>()
@@ -142,6 +148,21 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		manager.requestWhenInUseAuthorization()
 		manager.startUpdatingLocation()
 	}
+    
+    func initializeTimer() {
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(addSecond),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc
+    func addSecond() {
+        self.elapsedSeconds += 1
+    }
 
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		locations.map { location in
