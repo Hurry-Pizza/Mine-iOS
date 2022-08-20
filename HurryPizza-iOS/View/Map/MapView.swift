@@ -30,7 +30,8 @@ struct MapView: View {
 				map: mapDelegate.map,
 				lineCoordinates: $manager.lineCoordinates,
 				showCompleteModal: $showCompleteModal,
-                needToCapture: $manager.needToCaptureMap
+                needToCapture: $manager.needToCaptureMap,
+				manager: manager
             )
 
 			Rectangle()
@@ -115,6 +116,7 @@ struct CustomMapView: UIViewRepresentable {
 	@Binding var lineCoordinates: [CLLocationCoordinate2D]
 	@Binding var showCompleteModal: Bool
     @Binding var needToCapture: Bool
+	var manager: LocationManager
 
 	func makeUIView(context: Context) -> some UIView {
 		map.setRegion(point, animated: true)
@@ -139,6 +141,25 @@ struct CustomMapView: UIViewRepresentable {
 			}
 			if lineCoordinates.count > 5 && fetchDistance(lineCoordinates.first!, lineCoordinates.last!) < 23 {
 				showCompleteModal.toggle()
+				
+				manager.manager.stopUpdatingLocation()
+				
+				var finalLatitude = 0.0
+				var finalLongitude = 0.0
+				
+				for ele in lineCoordinates {
+					finalLatitude += ele.latitude
+					finalLongitude += ele.longitude
+				}
+				
+				finalLatitude /= Double(lineCoordinates.count)
+				finalLongitude /= Double(lineCoordinates.count)
+				
+				let finalCoordinate = CLLocationCoordinate2D(latitude: finalLatitude, longitude: finalLongitude)
+				
+				let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+				map.setRegion(.init(center: finalCoordinate, span: span), animated: false)
+				
                 needToCapture = true
 			}
 		}
@@ -157,7 +178,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private var timer: Timer?
     
-	private let manager = CLLocationManager()
+	let manager = CLLocationManager()
     
     private var subscription = Set<AnyCancellable>()
 
