@@ -10,6 +10,7 @@
 import SwiftUI
 import MapKit
 import UIKit
+import Combine
 
 struct MapView: View {
 	@StateObject private var manager = LocationManager()
@@ -86,6 +87,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var lineCoordinates: [CLLocationCoordinate2D] = []
 	@Published var coordinates: [CLLocationCoordinate2D] = []
 	private let manager = CLLocationManager()
+    
+    private var subscription = Set<AnyCancellable>()
 
 	override init() {
 		super.init()
@@ -100,13 +103,38 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 			let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
 			let center = CLLocationCoordinate2D(latitude: round(location.coordinate.latitude * 10_000_000) / 10_000_000, longitude: round(location.coordinate.longitude * 1_000_000) / 1_000_000)
 
-			if lineCoordinates.isEmpty {
-				lineCoordinates.append(center)
-				region = MKCoordinateRegion(center: center, span: span)
-
-				Task {
-					// TODO: 서버로 지금 현재 중심 위치 보내 놓기 +- 0.01
-				}
+            if lineCoordinates.isEmpty {
+                lineCoordinates.append(center)
+                region = MKCoordinateRegion(center: center, span: span)
+                
+                Task {
+                    // TODO: 서버로 지금 현재 중심 위치 보내 놓기 +- 0.01
+                    let parm = [
+                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude + 0.01),
+                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude - 0.01),
+                        CLLocationCoordinate2D(latitude: center.latitude - 0.01, longitude: center.longitude - 0.01),
+                        CLLocationCoordinate2D(latitude: center.latitude - 0.01, longitude: center.longitude + 0.01),
+                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude + 0.01)
+                    ]
+                    RouteManager.shared.getNearPath(parm)
+                        .sink(
+                            receiveCompletion: { print($0) },
+                            receiveValue: { response in
+                                switch response.result {
+                                case .success(let response):
+                                    if let data = response.data {
+                                        print(response.data)
+                                        data.forEach {
+                                            print($0)
+                                        }
+                                    }
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                        )
+                        .store(in: &subscription)
+                }
 
 			}
 //			print(location)

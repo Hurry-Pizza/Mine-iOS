@@ -55,16 +55,16 @@ final class RouteManager {
     ) -> AnyPublisher<DataResponse<OtherUserPathResponse, PathError>, Never> {
         let url = URL(string: "http://3.37.56.182:8080/v1/paths/within")!
         
-        let pathArr = pathList.map {
-            ["\($0.latitude)", "\($0.longitude)"]
+        let pathArr: [[Double]] = pathList.map {
+            [$0.latitude, $0.longitude]
         }
         
-        var request = try? URLRequest(url: url, method: .post)
+        var request = try? URLRequest(url: url, method: .put)
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let params: [String: [[String]]] = [
+        let params: [String: [[Double]]] = [
             "currentMap": pathArr
         ]
-        
+
         try? request?.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
         
         guard let request = request else {
