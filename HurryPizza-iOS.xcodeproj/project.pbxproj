@@ -58,6 +58,7 @@
 		701D603228B10743000918F4 /* Mine.json in Resources */ = {isa = PBXBuildFile; fileRef = 701D603128B10743000918F4 /* Mine.json */; };
 		701D603428B10767000918F4 /* Fireworks.json in Resources */ = {isa = PBXBuildFile; fileRef = 701D603328B10767000918F4 /* Fireworks.json */; };
 		701D603628B112F9000918F4 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D603528B112F9000918F4 /* Extentions.swift */; };
+		B28E234628B11F66001F88BB /* MapConfirmPopUPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E234528B11F66001F88BB /* MapConfirmPopUPView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		701D603128B10743000918F4 /* Mine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Mine.json; sourceTree = "<group>"; };
 		701D603328B10767000918F4 /* Fireworks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Fireworks.json; sourceTree = "<group>"; };
 		701D603528B112F9000918F4 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		B28E234528B11F66001F88BB /* MapConfirmPopUPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConfirmPopUPView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 			children = (
 				6031A61C28B06E900043104C /* MapViewModel.swift */,
 				6031A61E28B06EB80043104C /* MapView.swift */,
+				B28E234528B11F66001F88BB /* MapConfirmPopUPView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				602250C728AFE618001C5FE6 /* ContentView.swift in Sources */,
 				6031A63528B075B40043104C /* OnboardingView.swift in Sources */,
 				602250C528AFE618001C5FE6 /* HurryPizza_iOSApp.swift in Sources */,
+				B28E234628B11F66001F88BB /* MapConfirmPopUPView.swift in Sources */,
 				6031A61228B06E3A0043104C /* SettingViewModel.swift in Sources */,
 				6031A63028B0739B0043104C /* SplashViewModel.swift in Sources */,
 				6031A61D28B06E900043104C /* MapViewModel.swift in Sources */,
