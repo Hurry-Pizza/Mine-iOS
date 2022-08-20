@@ -11,6 +11,8 @@ import Combine
 import Alamofire
 
 final class RouteManager {
+    static let shared = RouteManager()
+    
     func savePath(
         _ pathList: [CLLocationCoordinate2D]
     ) -> AnyPublisher<DataResponse<SavePathResponse, PathError>, Never> {
