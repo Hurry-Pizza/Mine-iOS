@@ -8,6 +8,8 @@
 import Foundation
 
 final class RankManager {
+    static let shared = RankManager()
+    
     func getRanks(_ page: Int) {
         
     }

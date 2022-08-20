@@ -10,6 +10,8 @@ import Alamofire
 import Combine
 
 final class AuthManager {
+    static let shared = AuthManager()
+    
     func signup(
         email: String,
         nickname: String,
