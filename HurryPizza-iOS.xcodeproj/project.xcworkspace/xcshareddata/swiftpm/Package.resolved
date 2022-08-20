@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "91f46bf32205cf09ff9d9633d44d1ad563caf0c2"
+      }
+    },
+    {
       "identity" : "swiftkeychainwrapper",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jrendel/SwiftKeychainWrapper",
