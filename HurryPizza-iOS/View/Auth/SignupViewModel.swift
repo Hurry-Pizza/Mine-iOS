@@ -44,6 +44,7 @@ final class SignupViewModel: ObservableObject {
                            let paths = try? JSONDecoder().decode([CustomLocation].self, from: pathData) {
                             let pathList = paths.map { CLLocationCoordinate2D(latitude: $0.lat, longitude: $0.lng) }
                             _ = RouteManager.shared.savePath(pathList)
+                            UserDefaults.standard.removeObject(forKey: "initialPath")
                         }
                     }
                 case .failure(let error):
