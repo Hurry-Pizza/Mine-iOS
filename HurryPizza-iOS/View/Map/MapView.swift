@@ -47,7 +47,7 @@ struct MapView: View {
                                 .frame(width: 100, height: 40)
                             
                             Text("Quit")
-                                .font(.system(size: 22, weight: .semibold, design: .default))
+                                .font(.system(size: 20, weight: .semibold, design: .default))
                                 .foregroundColor(.white)
                         }
                     }
@@ -75,6 +75,11 @@ struct MapView: View {
                 .padding(.top, 64)
                 
                 Spacer()
+            }
+            
+            #warning("TODO: 테스트용")
+            if $manager.elapsedSeconds.wrappedValue > 5 {
+                MapConfirmPopUPView(pathList: manager.coordinates)
             }
         }
         .ignoresSafeArea()
@@ -128,7 +133,6 @@ struct CustomMapView: UIViewRepresentable {
 	}
 }
 
-
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var region = MKCoordinateRegion()
 	@Published var currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -172,38 +176,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if lineCoordinates.isEmpty {
                 lineCoordinates.append(center)
                 region = MKCoordinateRegion(center: center, span: span)
-                
-                Task {
-                    // TODO: 서버로 지금 현재 중심 위치 보내 놓기 +- 0.01
-                    let parm = [
-                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude + 0.01),
-                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude - 0.01),
-                        CLLocationCoordinate2D(latitude: center.latitude - 0.01, longitude: center.longitude - 0.01),
-                        CLLocationCoordinate2D(latitude: center.latitude - 0.01, longitude: center.longitude + 0.01),
-                        CLLocationCoordinate2D(latitude: center.latitude + 0.01, longitude: center.longitude + 0.01)
-                    ]
-                    RouteManager.shared.getNearPath(parm)
-                        .sink(
-                            receiveCompletion: { print($0) },
-                            receiveValue: { response in
-                                switch response.result {
-                                case .success(let response):
-                                    if let data = response.data {
-                                        print(response.data)
-                                        data.forEach {
-                                            print($0)
-                                        }
-                                    }
-                                case .failure(let error):
-                                    print(error)
-                                }
-                            }
-                        )
-                        .store(in: &subscription)
-                }
-
 			}
-//			print(location)
+            
 			coordinates.append(center)
 
 			if coordinates.count >= 10 {

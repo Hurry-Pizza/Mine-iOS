@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct MapConfirmPopUPView: View {
+    var pathList: [CLLocationCoordinate2D]
+    @State private var showModal = false
+    
     var body: some View {
 		ZStack {
 			Rectangle()
@@ -55,6 +59,7 @@ struct MapConfirmPopUPView: View {
 	
 	@ViewBuilder
 	private func CustomButton() -> some View {
+        
 		HStack(spacing: 0) {
 			ZStack {
 				Rectangle()
@@ -70,6 +75,13 @@ struct MapConfirmPopUPView: View {
 				Text("Save")
 					.foregroundColor(.junctionWhite)
 			}
+            .onTapGesture {
+                RouteManager.shared.savePathAtUserDefaults(pathList)
+                showModal = true
+            }
+            .fullScreenCover(isPresented: $showModal) {
+                SignupView()
+            }
 		}
 		.frame(height: 63)
 	}
@@ -77,6 +89,6 @@ struct MapConfirmPopUPView: View {
 
 struct MapConfirmPopUPView_Previews: PreviewProvider {
     static var previews: some View {
-        MapConfirmPopUPView()
+        MapConfirmPopUPView(pathList: [])
     }
 }

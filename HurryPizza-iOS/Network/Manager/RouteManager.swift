@@ -15,7 +15,7 @@ final class RouteManager {
     
     let kEarthRadius = 6378137.0
     
-    func didTapSaveButton(_ pathList: [CLLocationCoordinate2D]) {
+    func savePathAtUserDefaults(_ pathList: [CLLocationCoordinate2D]) {
         if AuthManager.shared.isAuthenticated {
             _ = savePath(pathList)
             return
