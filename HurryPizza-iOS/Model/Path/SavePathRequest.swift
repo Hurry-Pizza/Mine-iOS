@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct PathCompleteRequest: Encodable {
+struct SavePathRequest: Encodable {
     var pathList: [Double]
 }

@@ -9,10 +9,14 @@ import Foundation
 
 struct OtherUserPathResponse: Response {
     var message: String?
-    var data: [Path]?
+    var data: [Polygon]?
 }
 
-struct Path: Decodable {
-    var longitude: Double
-    var latitude: Double
+struct Polygon: Decodable {
+    var pathId: Int?
+    var path: [[Double]]?
+    var userId: Int?
+    var userNickname: String?
+    var color: String?
+    var mine: Bool?
 }

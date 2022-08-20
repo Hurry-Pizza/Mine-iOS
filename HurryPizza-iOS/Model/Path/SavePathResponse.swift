@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PathCompleteResponse: Response {
+struct SavePathResponse: Response {
     var message: String?
-    var data: Bool?
+    var data: String?
 }
