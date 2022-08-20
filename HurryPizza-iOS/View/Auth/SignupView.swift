@@ -6,128 +6,140 @@
 //
 
 import SwiftUI
-import Combine
 
 struct SignupView: View {
-    @StateObject private var viewModel = SignupViewModel()
-    
-    @State private var email = ""
-    @State private var nickname = ""
-    @State private var password = ""
-    
-    @State private var keyboardHeight: CGFloat = 0
-    
-    var body: some View {
-        ZStack {
-            Image("mine_home_bg")
-                .scaledToFill()
-            
-            VStack {
-                Spacer()
-                
-                VStack(alignment: .center, spacing: 10) {
-                    HStack {
-                        Image(systemName: "person.fill")
-                            .foregroundColor(.gray)
-                            .padding(.top, 20)
-                            .padding(.leading, 20)
-                            .padding(.bottom, 10)
-                        
-                        TextField("Enter your email", text: $email)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.emailAddress)
-                            .padding(.top, 20)
-                            .padding(.leading, 5)
-                            .padding(.trailing, 20)
-                            .padding(.bottom, 10)
-                    }
-                    
-                    Divider()
-                        .border(.gray, width: 2)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 20)
-                    
-                    HStack {
-                        Image(systemName: "person")
-                            .foregroundColor(.gray)
-                            .padding(.top, 20)
-                            .padding(.leading, 20)
-                            .padding(.bottom, 10)
-                        
-                        TextField("Enter your nickname", text: $nickname)
-                            .textInputAutocapitalization(.never)
-                            .padding(.top, 10)
-                            .padding(.leading, 5)
-                            .padding(.trailing, 20)
-                            .padding(.bottom, 10)
-                    }
-                    
-                    Divider()
-                        .border(.gray, width: 2)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 20)
-                    
-                    HStack {
-                        Image(systemName: "lock.fill")
-                            .foregroundColor(.gray)
-                            .padding(.top, 10)
-                            .padding(.leading, 20)
-                            .padding(.bottom, 20)
-                        
-                        SecureField("Enter your password", text: $password)
-                            .padding(.top, 10)
-                            .padding(.leading, 5)
-                            .padding(.trailing, 20)
-                            .padding(.bottom, 20)
-                    }
-                }
-                .background(Color.white)
-                .cornerRadius(24)
-                .padding(.leading, 30)
-                .padding(.trailing, 30)
-                
-                HStack {
-                    if $viewModel.isSignupFail.wrappedValue {
-                        Text("회원가입에 실패했습니다.")
-                            .foregroundColor(.red)
-                    }
-                    
-                    Spacer()
-                    
-                    ZStack(alignment: .topLeading) {
-                        Button {
-                            viewModel.signup(
-                                email: email,
-                                nickname: nickname,
-                                password: password
-                            )
-                        } label: {
-                            Text("Sign Up")
-                                .frame(width: 120, height: 44, alignment: .center)
-                                .foregroundColor(.white)
-                        }
-                        .background(AppColor.junction_blue.color)
-                        .cornerRadius(12)
-                        
-                        Rectangle()
-                            .fill(AppColor.junction_blue.color)
-                            .frame(width: 20, height: 20, alignment: .topLeading)
-                    }
-                }
-                .padding(.leading, 30)
-                .padding(.trailing, 30)
-            }
-            .padding(.bottom, self.keyboardHeight > 0 ? 200 : 120)
-            .onReceive(Publishers.keyboardHeight) {
-                self.keyboardHeight = $0
-            }
-        }
-        .ignoresSafeArea()
-    }
+	@State var userName: String = ""
+	@State var email: String = ""
+	@State var password: String = ""
+
+	var body: some View {
+		ZStack {
+			Image("loginBackground")
+				.resizable()
+//				.scaledToFit()
+//				.aspectRatio(contentMode: .fit)
+				.ignoresSafeArea()
+
+			background()
+
+			VStack {
+				Spacer()
+					.frame(maxHeight: 106)
+				
+				Text("Sing Up")
+					.foregroundColor(.junctionBlack)
+					.font(.system(size: 28))
+					.fontWeight(.bold)
+					
+
+				Text("for save your area")
+					.foregroundColor(.junctionBlack)
+					.font(.system(size: 20))
+					.padding(.top, 6)
+
+				Spacer().frame(maxHeight: 72)
+
+				customTextFields()
+
+				Spacer()
+				
+				signUpButton()
+			}
+		}
+	}
+
+	@ViewBuilder
+	private func background() -> some View {
+		ZStack {
+			VStack {
+				Spacer()
+					.frame(maxHeight: 61)
+				
+				Image("loginCloud")
+					.resizable()
+					.scaledToFit()
+
+				Spacer()
+			}
+		}
+	}
+
+	@ViewBuilder
+	private func customTextFields() -> some View {
+		ZStack {
+			Rectangle()
+				.foregroundColor(.white)
+
+			VStack(spacing: 0) {
+				customtextField("userName")
+
+				customtextField("email")
+
+				customtextField("password")
+			}
+		}
+			.frame(width: 357, height: 180)
+			.cornerRadius(13)
+	}
+
+	@ViewBuilder
+	private func customtextField(_ imageName: String) -> some View {
+		HStack(alignment: .center) {
+			Image(imageName)
+				.resizable()
+				.scaledToFit()
+				.frame(width: 24, height: 24)
+
+			switch imageName {
+			case "userName":
+				TextField("User name", text: $userName)
+					.padding(.leading, 24)
+					
+			case "email":
+				TextField("Email", text: $email)
+					.padding(.leading, 24)
+			case "password":
+				SecureField("Password", text: $password)
+					.padding(.leading, 24)
+			default:
+				Spacer()
+			}
+		}
+			.frame(height: 60)
+	}
+	
+	@ViewBuilder
+	private func signUpButton() -> some View{
+		ZStack {
+			Image("loginBottom")
+				.resizable()
+				.scaledToFit()
+
+			VStack {
+				Spacer()
+				
+				ZStack {
+					Rectangle()
+						.foregroundColor(.junctionGreen)
+						.cornerRadius(13)
+						.frame(width: 359, height: 60)
+					
+					Text("Sign Up")
+						.foregroundColor(.junctionWhite)
+						.fontWeight(.semibold)
+						.font(.system(size: 20))
+				}
+				.padding(.leading, 16)
+				.padding(.trailing, 15)
+			}
+			.frame(width: 390, height: 137)
+		}
+		
+	}
 }
 
 struct SignupView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupView()
-    }
+	static var previews: some View {
+		SignupView()
+	}
 }
