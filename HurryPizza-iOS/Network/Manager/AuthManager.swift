@@ -12,6 +12,7 @@ import Combine
 final class AuthManager {
     func signup(
         email: String,
+        nickname: String,
         password: String,
         colorCode: String
     ) -> AnyPublisher<DataResponse<AuthResponse, AuthError>, Never> {
@@ -21,6 +22,7 @@ final class AuthManager {
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let params: [String: String] = [
             "email": email,
+            "nickname": nickname,
             "password": password,
             "color": colorCode
         ]
