@@ -42,6 +42,7 @@ struct MapView: View {
             VStack {
                 HStack {
                     Button {
+						manager.manager.stopUpdatingLocation()
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
                         ZStack {
