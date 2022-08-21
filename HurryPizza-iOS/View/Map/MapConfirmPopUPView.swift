@@ -15,6 +15,8 @@ struct MapConfirmPopUPView: View {
     var mapImage: Image
     @State private var showModal = false
     
+    @State var isSignupCompleted: Bool
+    
     var body: some View {
 		ZStack {
 			Rectangle()
@@ -77,7 +79,6 @@ struct MapConfirmPopUPView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
             
-            
 			ZStack {
 				Rectangle()
 					.foregroundColor(.junctionGreen)
@@ -90,7 +91,7 @@ struct MapConfirmPopUPView: View {
                 showModal = true
             }
             .fullScreenCover(isPresented: $showModal) {
-                SignupView()
+                SignupView(isSignupCompleted: isSignupCompleted)
             }
 		}
 		.frame(height: 63)
@@ -99,6 +100,6 @@ struct MapConfirmPopUPView: View {
 
 struct MapConfirmPopUPView_Previews: PreviewProvider {
     static var previews: some View {
-        MapConfirmPopUPView(pathList: [], mapImage: Image(systemName: "person"))
+        MapConfirmPopUPView(pathList: [], mapImage: Image(systemName: "person"), isSignupCompleted: false)
     }
 }

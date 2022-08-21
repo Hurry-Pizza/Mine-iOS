@@ -21,10 +21,10 @@ final class RankManager {
             return Empty().eraseToAnyPublisher()
         }
         
-        var request = try? URLRequest(url: url, method: .post)
+        var request = try? URLRequest(url: url, method: .get)
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request?.setValue(token, forHTTPHeaderField: "Authorization")
-
+        
         guard let request = request else {
             return Empty().eraseToAnyPublisher()
         }

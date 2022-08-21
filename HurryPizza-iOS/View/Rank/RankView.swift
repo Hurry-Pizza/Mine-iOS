@@ -52,11 +52,7 @@ struct RankView: View {
 			}
 		}
 		.accentColor(.black)
-			.navigationTitle(
-				Text("Rank")
-					.font(.system(size: 17))
-					.fontWeight(.semibold)
-			)
+			.navigationTitle("Rank")
 			.navigationBarTitleDisplayMode(.inline)
 	}
 

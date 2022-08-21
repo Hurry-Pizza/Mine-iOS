@@ -17,20 +17,23 @@ struct MapView: View {
     
 	@StateObject private var manager = LocationManager()
 	@State private var lineCoorinate: [CLLocationCoordinate2D] = []
-	@State private var showCompleteModal: Bool = true
+	@State private var showCompleteModal: Bool = false
+    
+    @State var isSignupCompleted: Bool
     
     private let mapDelegate = MapDelegate()
 
 	var body: some View {
 		ZStack {
 			CustomMapView(
-				point: manager.region,
+				point: $manager.region,
 				coordinates: $manager.coordinates,
 				delegate: mapDelegate,
 				map: mapDelegate.map,
 				lineCoordinates: $manager.lineCoordinates,
 				showCompleteModal: $showCompleteModal,
                 needToCapture: $manager.needToCaptureMap,
+                isCenterSet: $manager.isCenterSet,
 				manager: manager
             )
 
@@ -42,7 +45,7 @@ struct MapView: View {
             VStack {
                 HStack {
                     Button {
-						manager.manager.stopUpdatingLocation()
+//						manager.manager.stopUpdatingLocation()
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
                         ZStack {
@@ -69,7 +72,8 @@ struct MapView: View {
                             Image("timer_icon")
                                 .font(.system(size: 22))
                             
-                            Text("\(Int(exactly: $manager.elapsedSeconds.wrappedValue / 3600)!)h \(Int(exactly: $manager.elapsedSeconds.wrappedValue / 60)!)m")
+//                            Text("\(Int(exactly: $manager.elapsedSeconds.wrappedValue / 3600)!)h \(Int(exactly: $manager.elapsedSeconds.wrappedValue / 60)!)m")
+                            Text("\(Int(exactly: $manager.elapsedSeconds.wrappedValue / 60)!)m \(Int(exactly: $manager.elapsedSeconds.wrappedValue % 60)!)s")
                                 .font(.system(size: 20, weight: .semibold, design: .default))
                                 .foregroundColor(.junctionWhite)
                         }
@@ -82,17 +86,18 @@ struct MapView: View {
                 Spacer()
             }
             
-            if manager.elapsedSeconds > 5 && manager.capturedMap != nil {
-                MapConfirmPopUPView(
-                    pathList: manager.coordinates,
-                    mapImage: manager.capturedMap!
-                )
-            }
+//            if manager.elapsedSeconds > 5 && manager.capturedMap != nil {
+//                MapConfirmPopUPView(
+//                    pathList: manager.coordinates,
+//                    mapImage: manager.capturedMap!
+//                )
+//            }
             
-            if showCompleteModal && manager.capturedMap != nil {
+            if manager.capturedMap != nil {
                 MapConfirmPopUPView(
                     pathList: manager.coordinates,
-                    mapImage: manager.capturedMap!
+                    mapImage: manager.capturedMap!,
+                    isSignupCompleted: isSignupCompleted
                 )
             }
         }
@@ -105,7 +110,7 @@ struct MapView: View {
 }
 
 struct CustomMapView: UIViewRepresentable {
-	var point: MKCoordinateRegion
+	@Binding var point: MKCoordinateRegion
 
 	@Binding var coordinates: [CLLocationCoordinate2D]
 
@@ -117,6 +122,8 @@ struct CustomMapView: UIViewRepresentable {
 	@Binding var lineCoordinates: [CLLocationCoordinate2D]
 	@Binding var showCompleteModal: Bool
     @Binding var needToCapture: Bool
+    @Binding var isCenterSet: Bool
+    
 	var manager: LocationManager
 
 	func makeUIView(context: Context) -> some UIView {
@@ -130,20 +137,31 @@ struct CustomMapView: UIViewRepresentable {
 	}
 
 	func updateUIView(_ uiView: UIViewType, context: Context) {
-
-		let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
+        
+        if lineCoordinates.count < 2 && !isCenterSet {
+            if lineCoordinates.count == 1 {
+                isCenterSet.toggle()
+            }
+            let span = MKCoordinateSpan(latitudeDelta: 0.0008, longitudeDelta: 0.0008)
+            map.setRegion(MKCoordinateRegion(center: lineCoordinates.last ?? point.center, span: span), animated: true)
+            return
+        }
+        
+        print(#function)
+        
+		let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 		map.setRegion(MKCoordinateRegion(center: lineCoordinates.last ?? point.center, span: span), animated: true)
 
 		if lineCoordinates.count > 1 {
-			Task {
 				let line = MKPolyline(coordinates: lineCoordinates, count: coordinates.count)
-
+//                if map.overlays.count > 0 {
+//                    map.removeOverlay(map.overlays[0])
+//                }
 				map.addOverlay(line)
-			}
-			if lineCoordinates.count > 5 && fetchDistance(lineCoordinates.first!, lineCoordinates.last!) < 23 {
-				showCompleteModal.toggle()
+			
+			if lineCoordinates.count > 5 && fetchDistance(lineCoordinates.first!, lineCoordinates.last!) < 23 && !showCompleteModal && !needToCapture {
 				
-				manager.manager.stopUpdatingLocation()
+//				manager.manager.stopUpdatingLocation()
 				
 				var finalLatitude = 0.0
 				var finalLongitude = 0.0
@@ -160,14 +178,20 @@ struct CustomMapView: UIViewRepresentable {
 				
 				let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
 				map.setRegion(.init(center: finalCoordinate, span: span), animated: false)
-				
-                needToCapture = true
+                
+                
+                let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
+                map.addOverlay(polygon)
+                
+                
+                self.needToCapture = true
 			}
 		}
 
 	}
 }
 
+// MARK: - LocationManager
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var region = MKCoordinateRegion()
 	@Published var currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -176,26 +200,81 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var elapsedSeconds: Int = 0
     @Published var capturedMap: Image?
     @Published var needToCaptureMap: Bool = false
+    @Published var isCenterSet: Bool = false
     
     private var timer: Timer?
     
-	let manager = CLLocationManager()
+    private var stepTimer: Timer?
+    private var steps = [
+        CLLocationCoordinate2D(latitude: 35.164996, longitude: 129.133856),
+        CLLocationCoordinate2D(latitude: 35.164755, longitude: 129.133413),
+        CLLocationCoordinate2D(latitude: 35.164594, longitude: 129.133050),
+        CLLocationCoordinate2D(latitude: 35.164338, longitude: 129.132812),
+        CLLocationCoordinate2D(latitude: 35.164067, longitude: 129.132726),
+        CLLocationCoordinate2D(latitude: 35.164286, longitude: 129.132309),
+        CLLocationCoordinate2D(latitude: 35.164651, longitude: 129.132229),
+        CLLocationCoordinate2D(latitude: 35.165005, longitude: 129.132378),
+        CLLocationCoordinate2D(latitude: 35.165216, longitude: 129.132723),
+        CLLocationCoordinate2D(latitude: 35.165286, longitude: 129.133136),
+        CLLocationCoordinate2D(latitude: 35.165232, longitude: 129.133445),
+        CLLocationCoordinate2D(latitude: 35.164996, longitude: 129.133856)
+    ]
+    
+    private var timeStep: [Double] = [
+        0.0,
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!),
+        Double((15...20).randomElement()!)
+    ]
+    
+//	let manager = CLLocationManager()
     
     private var subscription = Set<AnyCancellable>()
 
 	override init() {
 		super.init()
-		manager.delegate = self
-		manager.desiredAccuracy = kCLLocationAccuracyBest
-		manager.requestWhenInUseAuthorization()
-		manager.startUpdatingLocation()
+//		manager.delegate = self
+//		manager.desiredAccuracy = kCLLocationAccuracyBest
+//		manager.requestWhenInUseAuthorization()
+//		manager.startUpdatingLocation()
 	}
-    
+
     func initializeTimer() {
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
             selector: #selector(addSecond),
+            userInfo: nil,
+            repeats: true
+        )
+        
+        addStep()
+        stepTimer = Timer.scheduledTimer(
+            timeInterval: 0.5,
+            target: self,
+            selector: #selector(addStep),
             userInfo: nil,
             repeats: true
         )
@@ -213,6 +292,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    @objc
+    func addStep() {
+        if steps.count > 0 {
+            self.lineCoordinates.append(steps.removeFirst())
+        }
+    }
+    
     func takeCapture() -> UIImage {
         var image: UIImage?
         guard let currentLayer = UIApplication.shared.windows.first { $0.isKeyWindow }?.layer else { return UIImage() }
@@ -225,78 +311,83 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return image ?? UIImage()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locations.map { location in
-			let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
-			let center = CLLocationCoordinate2D(latitude: round(location.coordinate.latitude * 10_000_000) / 10_000_000, longitude: round(location.coordinate.longitude * 1_000_000) / 1_000_000)
-
-            if lineCoordinates.isEmpty {
-                lineCoordinates.append(center)
-                region = MKCoordinateRegion(center: center, span: span)
-			}
-            
-			coordinates.append(center)
-
-			if coordinates.count >= 10 {
-				let averageCoordinate = averageCoordinate()
-				print("Distance :", CLLocation(latitude: lineCoordinates.last!.latitude, longitude: lineCoordinates.last!.longitude)
-					.distance(from: CLLocation(latitude: averageCoordinate.latitude, longitude: averageCoordinate.longitude)))
-				if fetchDistance(lineCoordinates.last!, averageCoordinate) > 23 {
-					lineCoordinates.append(averageCoordinate)
-					print("Line ] ", lineCoordinates, averageCoordinate)
-					coordinates = []
-				} else {
-					coordinates = []
-				}
-			}
-		}
-	}
-
-	func averageCoordinate() -> CLLocationCoordinate2D {
-		var averageLatitude = 0.0
-		var averageLongitude = 0.0
-
-		for ele in coordinates {
-			averageLatitude += ele.latitude
-			averageLongitude += ele.longitude
-		}
-
-		averageLatitude /= Double(coordinates.count)
-		averageLongitude /= Double(coordinates.count)
-
-		var averageLocation = CLLocation(latitude: averageLatitude, longitude: averageLongitude)
-		var exceptCoordinate = coordinates[0]
-		var exceptIndex = 0
-
-		for i in 1..<coordinates.count {
-			if averageLocation.distance(from: CLLocation(latitude: coordinates[i].latitude, longitude: coordinates[i].longitude)) >
-				averageLocation.distance(from: CLLocation(latitude: exceptCoordinate.latitude, longitude: exceptCoordinate.longitude)) {
-				exceptCoordinate = coordinates[i]
-				exceptIndex = i
-			}
-		}
-
-		coordinates.remove(at: exceptIndex)
-
-		averageLatitude = 0.0
-		averageLongitude = 0.0
-
-		for ele in coordinates {
-			averageLatitude += ele.latitude
-			averageLongitude += ele.longitude
-		}
-		averageLatitude /= Double(coordinates.count)
-		averageLongitude /= Double(coordinates.count)
-
-		print("Ave :", averageLatitude, averageLongitude)
-		return CLLocationCoordinate2D(latitude: averageLatitude, longitude: averageLongitude)
-	}
+    // MARK: Delegate 함수
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print(#function)
+//        return
+//        locations.forEach { location in
+//			let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
+//			let center = CLLocationCoordinate2D(latitude: round(location.coordinate.latitude * 10_000_000) / 10_000_000, longitude: round(location.coordinate.longitude * 1_000_000) / 1_000_000)
+//
+//            if lineCoordinates.isEmpty {
+//                lineCoordinates.append(center)
+//                region = MKCoordinateRegion(center: center, span: span)
+//			}
+//
+//			coordinates.append(center)
+//
+//			if coordinates.count >= 10 {
+//				let averageCoordinate = averageCoordinate()
+//				print("Distance :", CLLocation(latitude: lineCoordinates.last!.latitude, longitude: lineCoordinates.last!.longitude)
+//					.distance(from: CLLocation(latitude: averageCoordinate.latitude, longitude: averageCoordinate.longitude)))
+//				if fetchDistance(lineCoordinates.last!, averageCoordinate) > 23 {
+//					lineCoordinates.append(averageCoordinate)
+//					print("Line ] ", lineCoordinates, averageCoordinate)
+//					coordinates = []
+//				} else {
+//					coordinates = []
+//				}
+//			}
+//		}
+//	}
+//
+//	func averageCoordinate() -> CLLocationCoordinate2D {
+//        print(#function)
+//		var averageLatitude = 0.0
+//		var averageLongitude = 0.0
+//
+//		for ele in coordinates {
+//			averageLatitude += ele.latitude
+//			averageLongitude += ele.longitude
+//		}
+//
+//		averageLatitude /= Double(coordinates.count)
+//		averageLongitude /= Double(coordinates.count)
+//
+//		var averageLocation = CLLocation(latitude: averageLatitude, longitude: averageLongitude)
+//		var exceptCoordinate = coordinates[0]
+//		var exceptIndex = 0
+//
+//		for i in 1..<coordinates.count {
+//			if averageLocation.distance(from: CLLocation(latitude: coordinates[i].latitude, longitude: coordinates[i].longitude)) >
+//				averageLocation.distance(from: CLLocation(latitude: exceptCoordinate.latitude, longitude: exceptCoordinate.longitude)) {
+//				exceptCoordinate = coordinates[i]
+//				exceptIndex = i
+//			}
+//		}
+//
+//		coordinates.remove(at: exceptIndex)
+//
+//		averageLatitude = 0.0
+//		averageLongitude = 0.0
+//
+//		for ele in coordinates {
+//			averageLatitude += ele.latitude
+//			averageLongitude += ele.longitude
+//		}
+//		averageLatitude /= Double(coordinates.count)
+//		averageLongitude /= Double(coordinates.count)
+//
+//		print("Ave :", averageLatitude, averageLongitude)
+//		return CLLocationCoordinate2D(latitude: averageLatitude, longitude: averageLongitude)
+//	}
 } // Class LocationManager
 
 class MapDelegate: UIViewController, MKMapViewDelegate {
     var map = MKMapView()
 
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print(#function)
 		if overlay is MKCircle {
 			let renderer = MKCircleRenderer(overlay: overlay)
 			renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
@@ -305,7 +396,7 @@ class MapDelegate: UIViewController, MKMapViewDelegate {
 			return renderer
 
 		} else if overlay is MKPolyline {
-			print("Coordinate :", overlay.coordinate)
+//			print("Coordinate :", overlay.coordinate)
 			if overlay.coordinate.latitude < 30 || overlay.coordinate.latitude > 37 || overlay.coordinate.longitude < 123 || overlay.coordinate.longitude > 132 {
 				return MKOverlayRenderer()
 			}
@@ -313,10 +404,9 @@ class MapDelegate: UIViewController, MKMapViewDelegate {
 			renderer.strokeColor = UIColor(named: "RouteColor")
 			renderer.lineWidth = 3
 			return renderer
-
 		} else if overlay is MKPolygon {
 			let renderer = MKPolygonRenderer(overlay: overlay)
-			renderer.fillColor = UIColor(Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.25))
+			renderer.fillColor = UIColor(Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 1))
 			renderer.strokeColor = UIColor.orange
 			renderer.lineWidth = 2
 			return renderer
