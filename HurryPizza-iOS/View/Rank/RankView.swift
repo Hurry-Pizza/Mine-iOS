@@ -20,11 +20,11 @@ struct RankView: View {
 				prize()
 				
 				VStack(spacing: 11) {
+					listCell(name: "Toby", rank: 4, isUp: false)
 					listCell(name: "Toby", rank: 4, isUp: true)
 					listCell(name: "Toby", rank: 4, isUp: true)
 					listCell(name: "Toby", rank: 4, isUp: true)
-					listCell(name: "Toby", rank: 4, isUp: true)
-					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: false)
 					listCell(name: "Toby", rank: 4, isUp: true)
 				}
 				.padding(.top, 30)
@@ -171,7 +171,7 @@ struct RankView: View {
 						.resizable()
 						.frame(width: 18, height: 12)
 				} else {
-					Image("rankDown")
+					Image("rankingDown")
 						.resizable()
 						.frame(width: 18, height: 12)
 				}
