@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isContentReady : Bool = false
+    
     var body: some View {
-        HomeView()
+        
+        ZStack{
+            
+           HomeView()
+            
+            if !isContentReady {
+                SplashView()
+                    .transition(.opacity)
+            }
+        }
+        .onAppear{
+            print("ContentView - onAppear() called")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                print("ContentView - 1.5초 뒤")
+                withAnimation{isContentReady.toggle()}
+            })
+        }
     }
 }
 
