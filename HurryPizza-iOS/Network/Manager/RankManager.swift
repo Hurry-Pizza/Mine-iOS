@@ -16,12 +16,14 @@ final class RankManager {
     func getRanks() -> AnyPublisher<DataResponse<RankResponse, Error>, Never> {
         let url = URL(string: "http://3.37.56.182:8080/v1/ranks")!
         
-        guard let token = KeychainWrapper.standard.string(forKey: "accessToken") else {
-            KeychainWrapper.standard.remove(forKey: "accessToken")
-            return Empty().eraseToAnyPublisher()
-        }
+//        guard let token = KeychainWrapper.standard.string(forKey: "accessToken") else {
+//            KeychainWrapper.standard.remove(forKey: "accessToken")
+//            return Empty().eraseToAnyPublisher()
+//        }
+		// swiftlint:disable:next line_length
+		let token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQifQ.eyJzdWIiOiJ1c2VyIiwiaW5mbyI6eyJpZCI6MTgsImVtYWlsIjoibjIyMmV3QGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIifSwiZXhwIjoxNjYzNTg0NjUyfQ.B6E9dX44k9FAfL9dqSmc2aQOy10pnp_kmzOPD6-A8qg"
         
-        var request = try? URLRequest(url: url, method: .post)
+        var request = try? URLRequest(url: url, method: .get)
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request?.setValue(token, forHTTPHeaderField: "Authorization")
 
