@@ -52,11 +52,7 @@ struct RankView: View {
 			}
 		}
 		.accentColor(.black)
-			.navigationTitle(
-				Text("Rank")
-					.font(.system(size: 17))
-					.fontWeight(.semibold)
-			)
+			.navigationTitle("Rank"	)
 			.navigationBarTitleDisplayMode(.inline)
 	}
 
@@ -225,11 +221,6 @@ struct RankView: View {
 			.cornerRadius(13)
 	}
 }
-
-
-
-
-
 
 struct RankView_Previews: PreviewProvider {
 	static var previews: some View {

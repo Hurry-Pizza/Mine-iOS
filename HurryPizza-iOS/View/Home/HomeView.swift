@@ -19,7 +19,7 @@ struct HomeView: View {
 
 				VStack {
 					HStack {
-						NavigationLink(destination: Text("HI")) {
+						NavigationLink(destination: Text("License Description View")) {
 							Image("info_button")
 						}
 						Spacer()
