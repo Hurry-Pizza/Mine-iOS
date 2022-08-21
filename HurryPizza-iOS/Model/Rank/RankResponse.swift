@@ -21,5 +21,5 @@ struct RankData: Decodable {
 struct Rank: Decodable {
     var userId: Int?
     var userNickname: String?
-    var area: Int?
+    var area: Double
 }

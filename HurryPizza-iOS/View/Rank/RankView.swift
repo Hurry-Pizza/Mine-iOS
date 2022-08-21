@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RankView: View {
+	@StateObject var rank: RankViewModel = RankViewModel()
+	
 	var body: some View {
 		ZStack {
 			Image("rankBackground")
@@ -16,18 +18,37 @@ struct RankView: View {
 
 			VStack {
 				Spacer()
-
-				prize()
+				
+				if rank.rankList.count >= 3 {
+					prize(firstName: rank.rankList[0].userNickname, secondName: rank.rankList[1].userNickname, thirdName: rank.rankList[2].userNickname)
+				}
 
 				VStack(spacing: 11) {
-					listCell(name: "Toby", rank: 4, isUp: false)
-					listCell(name: "Toby", rank: 4, isUp: true)
-					listCell(name: "Toby", rank: 4, isUp: true)
-					listCell(name: "Toby", rank: 4, isUp: true)
-					listCell(name: "Toby", rank: 4, isUp: false)
-					listCell(name: "Toby", rank: 4, isUp: true)
+					if rank.rankList.count >= 4 {
+						listCell(name: rank.rankList[3].userNickname, rank: 4, isUp: false)
+					}
+					if rank.rankList.count >= 5 {
+						listCell(name: rank.rankList[4].userNickname, rank: 5, isUp: true)
+					}
+					if rank.rankList.count >= 6 {
+						listCell(name: rank.rankList[5].userNickname, rank: 6, isUp: true)
+					}
+					if rank.rankList.count >= 7 {
+						listCell(name: rank.rankList[6].userNickname, rank: 7, isUp: true)
+					}
+					if rank.rankList.count >= 8 {
+						listCell(name: rank.rankList[7].userNickname, rank: 8, isUp: true)
+					}
+					if rank.rankList.count >= 9 {
+						listCell(name: rank.rankList[8].userNickname, rank: 9, isUp: true)
+					}
+					Spacer()
 				}
 					.padding(.top, 30)
+			}
+			.onAppear {
+				rank.getRanks()
+				
 			}
 		}
 		.accentColor(.black)
@@ -40,13 +61,14 @@ struct RankView: View {
 	}
 
 	@ViewBuilder
-	private func prize() -> some View {
+	private func prize(firstName: String?, secondName: String?, thirdName: String?) -> some View {
 		ZStack(alignment: .leading) {
 			VStack {
 //				Spacer()
 //					.frame(height: 11)
-
-				second(name: "Toby", isUP: true)
+				if secondName != nil {
+					second(name: secondName!, isUP: true)
+				}
 
 				Spacer()
 			}
@@ -54,15 +76,18 @@ struct RankView: View {
 			VStack {
 				Spacer(minLength: 11)
 					.frame(height: 11)
-
-				third(name: "Toby", isUp: false)
-
+				
+				if thirdName != nil {
+					third(name: thirdName!, isUp: false)
+				}
 				Spacer()
 			}
 				.padding(.leading, 220.68)
-
-			first(name: "Toby", isUp: true)
-				.padding(.leading, 88)
+			
+			if firstName != nil {
+				first(name: firstName!, isUp: true)
+					.padding(.leading, 88)
+			}
 		}
 			.frame(width: 354.45, height: 197.5)
 	}
@@ -167,7 +192,7 @@ struct RankView: View {
 	}
 
 	@ViewBuilder
-	private func listCell(name: String, rank: Int, isUp: Bool) -> some View {
+	private func listCell(name: String?, rank: Int, isUp: Bool) -> some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
 				.foregroundColor(Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.67))
@@ -188,7 +213,7 @@ struct RankView: View {
 					.font(.system(size: 17))
 					.padding(.leading, 5)
 
-				Text(name)
+				Text(name ?? "nil")
 					.foregroundColor(.junctionBlack)
 					.font(.system(size: 17))
 					.fontWeight(.semibold)
