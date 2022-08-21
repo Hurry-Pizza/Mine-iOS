@@ -13,8 +13,21 @@ struct RankView: View {
 			Image("rankBackground")
 				.resizable()
 				.ignoresSafeArea()
+			
 			VStack {
+				Spacer()
+				
 				prize()
+				
+				VStack(spacing: 11) {
+					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: true)
+					listCell(name: "Toby", rank: 4, isUp: true)
+				}
+				.padding(.top, 30)
 			}
 		}
 	}
@@ -111,41 +124,76 @@ struct RankView: View {
 			}
 		}
 	}
-}
+	
+	@ViewBuilder
+	private func third(name: String, isUp: Bool) -> some View {
+		ZStack {
+			Image("third")
+				.resizable()
+				.frame(width: 124.77, height: 126.35)
 
-@ViewBuilder
-private func third(name: String, isUp: Bool) -> some View {
-	ZStack {
-		Image("third")
-			.resizable()
-			.frame(width: 124.77, height: 126.35)
+			VStack {
+				Spacer()
+					.frame(height: 70)
 
-		VStack {
-			Spacer()
-				.frame(height: 70)
+				HStack(alignment: .center, spacing: 0) {
+					if isUp {
+						Image("rankingUp")
+							.resizable()
+							.frame(width: 18, height: 12)
+					} else {
+						Image("rankingDown")
+							.resizable()
+							.frame(width: 18, height: 12)
+					}
 
+					Text("3")
+						.font(.system(size: 17))
+						.foregroundColor(.junctionBlack)
+					Text(name)
+						.font(.system(size: 17))
+						.foregroundColor(.junctionBlack)
+						.padding(.leading, 10)
+				}
+			}
+		}
+	}
+	
+	@ViewBuilder
+	private func listCell(name: String, rank: Int, isUp: Bool) -> some View {
+		ZStack(alignment: .leading) {
+			Rectangle()
+				.foregroundColor(Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.67))
+			
 			HStack(alignment: .center, spacing: 0) {
 				if isUp {
 					Image("rankingUp")
 						.resizable()
 						.frame(width: 18, height: 12)
 				} else {
-					Image("rankingDown")
+					Image("rankDown")
 						.resizable()
 						.frame(width: 18, height: 12)
 				}
-
-				Text("3")
+				
+				Text(String(rank))
+					.foregroundColor(.junctionGray)
 					.font(.system(size: 17))
-					.foregroundColor(.junctionBlack)
+					.padding(.leading, 5)
+				
 				Text(name)
-					.font(.system(size: 17))
 					.foregroundColor(.junctionBlack)
-					.padding(.leading, 10)
+					.font(.system(size: 17))
+					.fontWeight(.semibold)
+					.padding(.leading, 30)
 			}
+			.padding(.leading, 18)
 		}
+		.frame(width: 357, height: 60)
+		.cornerRadius(13)
 	}
 }
+
 
 
 
