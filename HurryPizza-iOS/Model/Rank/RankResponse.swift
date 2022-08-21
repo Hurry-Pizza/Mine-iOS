@@ -9,11 +9,17 @@ import Foundation
 
 struct RankResponse: Response {
     var message: String?
-    var data: Rank?
+    var data: RankData?
+}
+
+struct RankData: Decodable {
+    var ranks: [Rank]?
+    var startDay: String?
+    var endDay: String?
 }
 
 struct Rank: Decodable {
     var userId: Int?
-    var userColor: String?
-    var rank: Int?
+    var userNickname: String?
+    var area: Int?
 }
