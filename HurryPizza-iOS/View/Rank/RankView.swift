@@ -13,12 +13,12 @@ struct RankView: View {
 			Image("rankBackground")
 				.resizable()
 				.ignoresSafeArea()
-			
+
 			VStack {
 				Spacer()
-				
+
 				prize()
-				
+
 				VStack(spacing: 11) {
 					listCell(name: "Toby", rank: 4, isUp: false)
 					listCell(name: "Toby", rank: 4, isUp: true)
@@ -27,9 +27,16 @@ struct RankView: View {
 					listCell(name: "Toby", rank: 4, isUp: false)
 					listCell(name: "Toby", rank: 4, isUp: true)
 				}
-				.padding(.top, 30)
+					.padding(.top, 30)
 			}
 		}
+		.accentColor(.black)
+			.navigationTitle(
+				Text("Rank")
+					.font(.system(size: 17))
+					.fontWeight(.semibold)
+			)
+			.navigationBarTitleDisplayMode(.inline)
 	}
 
 	@ViewBuilder
@@ -40,24 +47,24 @@ struct RankView: View {
 //					.frame(height: 11)
 
 				second(name: "Toby", isUP: true)
-				
+
 				Spacer()
 			}
-			
+
 			VStack {
 				Spacer(minLength: 11)
 					.frame(height: 11)
-				
+
 				third(name: "Toby", isUp: false)
-				
+
 				Spacer()
 			}
-			.padding(.leading, 229.68)
-			
+				.padding(.leading, 220.68)
+
 			first(name: "Toby", isUp: true)
 				.padding(.leading, 88)
 		}
-		.frame(width: 354.45, height: 197.5)
+			.frame(width: 354.45, height: 197.5)
 	}
 
 	@ViewBuilder
@@ -124,7 +131,7 @@ struct RankView: View {
 			}
 		}
 	}
-	
+
 	@ViewBuilder
 	private func third(name: String, isUp: Bool) -> some View {
 		ZStack {
@@ -158,13 +165,13 @@ struct RankView: View {
 			}
 		}
 	}
-	
+
 	@ViewBuilder
 	private func listCell(name: String, rank: Int, isUp: Bool) -> some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
 				.foregroundColor(Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.67))
-			
+
 			HStack(alignment: .center, spacing: 0) {
 				if isUp {
 					Image("rankingUp")
@@ -175,22 +182,22 @@ struct RankView: View {
 						.resizable()
 						.frame(width: 18, height: 12)
 				}
-				
+
 				Text(String(rank))
 					.foregroundColor(.junctionGray)
 					.font(.system(size: 17))
 					.padding(.leading, 5)
-				
+
 				Text(name)
 					.foregroundColor(.junctionBlack)
 					.font(.system(size: 17))
 					.fontWeight(.semibold)
 					.padding(.leading, 30)
 			}
-			.padding(.leading, 18)
+				.padding(.leading, 18)
 		}
-		.frame(width: 357, height: 60)
-		.cornerRadius(13)
+			.frame(width: 357, height: 60)
+			.cornerRadius(13)
 	}
 }
 
