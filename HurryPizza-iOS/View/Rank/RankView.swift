@@ -222,11 +222,6 @@ struct RankView: View {
 	}
 }
 
-
-
-
-
-
 struct RankView_Previews: PreviewProvider {
 	static var previews: some View {
 		RankView()
